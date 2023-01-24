@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Daily News</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="category_description">News will be shown here.</string>
+    <string name="bookmarks_description">Bookmarks will be shown here.</string>
+    <string name="home">Home</string>
+    <string name="bookmarks">Bookmarks</string>
+</resources>
