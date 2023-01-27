@@ -2,9 +2,10 @@ package com.fazlerabbikhan.dailynews.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "news")
+@Entity(tableName = "news", indices = [Index(value = ["url"], unique = true)])
 data class NewsArticle(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "title") val title: String?,

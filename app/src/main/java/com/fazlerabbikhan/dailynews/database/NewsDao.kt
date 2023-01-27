@@ -5,7 +5,7 @@ import androidx.room.*
 
 @Dao
 interface NewsDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addNews(newsArticle: NewsArticle)
 
     @Query("SELECT * FROM news WHERE category=:category ORDER BY id DESC")

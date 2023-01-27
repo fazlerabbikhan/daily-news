@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fazlerabbikhan.dailynews.R
 import com.fazlerabbikhan.dailynews.database.NewsArticle
-import com.fazlerabbikhan.dailynews.global.Global
 import com.fazlerabbikhan.dailynews.viewmodel.NewsViewModel
 
 class CardAdapter(
@@ -61,6 +59,8 @@ class CardAdapter(
 
         if(item.isBookmark) {
             holder.newsBookmark.setImageResource(R.drawable.ic_launcher_bookmark_24)
+        } else {
+            holder.newsBookmark.setImageResource(R.drawable.ic_outline_bookmark_24)
         }
     }
 
