@@ -2,6 +2,7 @@ package com.fazlerabbikhan.dailynews.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.fazlerabbikhan.dailynews.models.NewsArticle
 
 @Dao
 interface NewsDao {
@@ -11,9 +12,8 @@ interface NewsDao {
     @Query("SELECT * FROM news WHERE category=:category ORDER BY id DESC")
     fun readNews(category: String): LiveData<List<NewsArticle>>
 
-//    // Search function
-//    @Query("SELECT * FROM news WHERE title LIKE '%' || :search || '%'")
-//    fun searchNews(search: String?): LiveData<List<NewsArticle>>
+    @Query("SELECT * FROM news WHERE title LIKE '%' || :search || '%'")
+    fun searchNews(search: String?): LiveData<List<NewsArticle>>
 
     @Query("UPDATE news SET isBookmark=:isBookmark WHERE id=:id")
     suspend fun addBookmarkNews(id: Int, isBookmark: Boolean)

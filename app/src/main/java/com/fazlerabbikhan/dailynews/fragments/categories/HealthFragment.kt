@@ -11,9 +11,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.fazlerabbikhan.dailynews.R
 import com.fazlerabbikhan.dailynews.adapters.CardAdapter
-import com.fazlerabbikhan.dailynews.database.NewsArticle
 import com.fazlerabbikhan.dailynews.databinding.FragmentHealthBinding
-import com.fazlerabbikhan.dailynews.global.Global
+import com.fazlerabbikhan.dailynews.global.Constant
+import com.fazlerabbikhan.dailynews.models.NewsArticle
 import com.fazlerabbikhan.dailynews.viewmodel.NewsViewModel
 
 class HealthFragment : Fragment() {
@@ -75,7 +75,7 @@ class HealthFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
-        Global.category = "health"
+        Constant.category = "health"
         viewModel.readNewsFromLocal()
 
         val recycler = binding.cardNewsRecycler

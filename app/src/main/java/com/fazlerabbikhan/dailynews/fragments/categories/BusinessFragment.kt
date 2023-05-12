@@ -11,9 +11,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.fazlerabbikhan.dailynews.R
 import com.fazlerabbikhan.dailynews.adapters.CardAdapter
-import com.fazlerabbikhan.dailynews.database.NewsArticle
+import com.fazlerabbikhan.dailynews.models.NewsArticle
 import com.fazlerabbikhan.dailynews.databinding.FragmentBusinessBinding
-import com.fazlerabbikhan.dailynews.global.Global
+import com.fazlerabbikhan.dailynews.global.Constant
 import com.fazlerabbikhan.dailynews.viewmodel.NewsViewModel
 
 class BusinessFragment : Fragment() {
@@ -24,7 +24,7 @@ class BusinessFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentBusinessBinding.inflate(inflater, container, false)
         return binding.root
@@ -76,7 +76,7 @@ class BusinessFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
-        Global.category = "business"
+        Constant.category = "business"
         viewModel.readNewsFromLocal()
 
         val recycler = binding.cardNewsRecycler

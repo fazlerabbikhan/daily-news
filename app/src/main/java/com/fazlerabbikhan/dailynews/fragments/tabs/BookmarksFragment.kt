@@ -11,8 +11,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.fazlerabbikhan.dailynews.R
 import com.fazlerabbikhan.dailynews.adapters.CardAdapter
-import com.fazlerabbikhan.dailynews.database.NewsArticle
 import com.fazlerabbikhan.dailynews.databinding.FragmentBookmarksBinding
+import com.fazlerabbikhan.dailynews.models.NewsArticle
 import com.fazlerabbikhan.dailynews.viewmodel.NewsViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

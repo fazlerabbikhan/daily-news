@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.fazlerabbikhan.dailynews.adapters.CategoryAdapter
-import com.fazlerabbikhan.dailynews.adapters.CategoryAdapter.Companion.categoryList
+import com.fazlerabbikhan.dailynews.adapters.TabAdapter
+import com.fazlerabbikhan.dailynews.adapters.TabAdapter.Companion.tabList
 import com.fazlerabbikhan.dailynews.databinding.FragmentHomeBinding
 import com.fazlerabbikhan.dailynews.viewmodel.NewsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -34,10 +34,10 @@ class HomeFragment : Fragment() {
         val tabLayout = binding.tabLayoutHome
         val viewPage = binding.viewPager2
 
-        val categoryAdapter = CategoryAdapter(childFragmentManager, lifecycle)
+        val categoryAdapter = TabAdapter(childFragmentManager, lifecycle)
         viewPage.adapter = categoryAdapter
         TabLayoutMediator(tabLayout, viewPage) { tab, position ->
-            tab.text = categoryList[position].title
+            tab.text = tabList[position].title
         }.attach()
     }
 }

@@ -2,22 +2,20 @@ package com.fazlerabbikhan.dailynews.viewmodel
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
-import com.fazlerabbikhan.dailynews.database.NewsArticle
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import com.fazlerabbikhan.dailynews.database.NewsDatabase
-import com.fazlerabbikhan.dailynews.global.Global
-import com.fazlerabbikhan.dailynews.models.Article
-import com.fazlerabbikhan.dailynews.models.NewsData
+import com.fazlerabbikhan.dailynews.global.Category
+import com.fazlerabbikhan.dailynews.global.Constant
+import com.fazlerabbikhan.dailynews.models.NewsArticle
 import com.fazlerabbikhan.dailynews.network.NewsApi
 import com.fazlerabbikhan.dailynews.repository.NewsRepository
+import com.fazlerabbikhan.dailynews.utils.Internet
 import kotlinx.coroutines.Dispatchers
-
 import kotlinx.coroutines.launch
 
-class NewsViewModel (application: Application) : AndroidViewModel(application)
-{
-//    private val _news = MutableLiveData<NewsData>()
-//    private val _articles = MutableLiveData<List<Article>?>()
+class NewsViewModel (application: Application) : AndroidViewModel(application) {
     private val result = mutableListOf<NewsArticle>()
     private val repository: NewsRepository
     lateinit var readNews: LiveData<List<NewsArticle>>
@@ -30,26 +28,23 @@ class NewsViewModel (application: Application) : AndroidViewModel(application)
 
     fun readNewsFromLocal() {
         with(repository) {
-            Log.d("TAG", "readNewsFromLocal: ${Global.category}")
-            readNews = when (Global.category) {
-                "business" -> readNews("business")
-                "entertainment" -> readNews("entertainment")
-                "general" -> readNews("general")
-                "health" -> readNews("health")
-                "science" -> readNews("science")
-                "sports" -> readNews("sports")
-                else -> readNews("technology")
+            readNews = when (Constant.category) {
+                Category.BUSINESS -> readNews(Category.BUSINESS)
+                Category.ENTERTAINMENT -> readNews(Category.ENTERTAINMENT)
+                Category.GENERAL -> readNews(Category.GENERAL)
+                Category.HEALTH -> readNews(Category.HEALTH)
+                Category.SCIENCE -> readNews(Category.SCIENCE)
+                Category.SPORTS -> readNews(Category.SPORTS)
+                else -> readNews(Category.TECHNOLOGY)
             }
         }
     }
 
     fun getNewsFromRemote() {
-            Log.d("TAG", "getNewsFromRemote: call news api")
+        if (Internet.isOnline()) {
             viewModelScope.launch {
                 try {
-                    val response = NewsApi.retrofitService.topHeadlinesNews(
-                        Global.category!!
-                    )
+                    val response = NewsApi.retrofitService.topHeadlinesNews(Constant.category, Constant.TOKEN)
                     response.articles?.map {
                         result.add(
                             NewsArticle(
@@ -62,16 +57,17 @@ class NewsViewModel (application: Application) : AndroidViewModel(application)
                                 it.source?.name,
                                 it.url,
                                 it.urlToImage,
-                                Global.category
+                                Constant.category
                             )
                         )
                     }
                     addNews()
-                Log.d("TAG", "getTopHeadlines: called ${response.articles?.size}")
+//                Log.d("TAG", "getTopHeadlines: called ${response.articles.size}")
                 } catch (e: Exception) {
                     Log.d("TAG", "$e")
                 }
             }
+        }
     }
 
     private fun addNews() {

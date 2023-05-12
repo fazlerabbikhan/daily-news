@@ -1,7 +1,7 @@
 package com.fazlerabbikhan.dailynews.repository
 
-import com.fazlerabbikhan.dailynews.database.NewsArticle
 import com.fazlerabbikhan.dailynews.database.NewsDao
+import com.fazlerabbikhan.dailynews.models.NewsArticle
 
 class NewsRepository(private val newsDao: NewsDao){
 

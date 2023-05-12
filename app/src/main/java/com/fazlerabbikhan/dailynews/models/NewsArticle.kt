@@ -1,4 +1,4 @@
-package com.fazlerabbikhan.dailynews.database
+package com.fazlerabbikhan.dailynews.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

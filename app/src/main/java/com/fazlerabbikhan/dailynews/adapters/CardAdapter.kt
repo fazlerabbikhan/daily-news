@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fazlerabbikhan.dailynews.R
-import com.fazlerabbikhan.dailynews.database.NewsArticle
+import com.fazlerabbikhan.dailynews.global.Constant
+import com.fazlerabbikhan.dailynews.models.NewsArticle
 import com.fazlerabbikhan.dailynews.viewmodel.NewsViewModel
 
 class CardAdapter(
@@ -37,19 +39,18 @@ class CardAdapter(
             .with(holder.itemView.context)
             .load(item.urlToImage)
             .centerCrop()
-//            .thumbnail(
-//                Glide.with(holder.itemView.context)
-//                    .load(R.drawable.search_gif)
-//            )
+            .thumbnail(
+                Glide.with(holder.itemView.context)
+                    .load(R.drawable.search_thumbnail_1)
+            )
             .into(holder.itemView.findViewById(R.id.card_news_image));
 
 //        details fragment action
-//        holder.itemView.setOnClickListener {
-////            Log.d("TAG", "onBindViewHolder: click")
-//            Global.newsArticle = item
-////            Log.d("TAG", "onBindViewHolder: ${Global.newsArticle}")
-//            it.findNavController().navigate(R.id.newsArticleFragment)
-//        }
+        holder.itemView.setOnClickListener {
+            Log.d("TAG", "onBindViewHolder: click")
+            Constant.newsArticle = item
+            it.findNavController().navigate(R.id.newsArticleFragment)
+        }
 
 //        Bookmark button
         holder.newsBookmark.setOnClickListener {

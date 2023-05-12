@@ -6,4 +6,8 @@
     <string name="home">Home</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="search">Search</string>
+    <string name="continue_reading">Continue reading...</string>
+    <string name="content_image">Content image</string>
+    <string name="author_name">Author: %s</string>
+    <string name="source_name">Source: %s</string>
 </resources>
